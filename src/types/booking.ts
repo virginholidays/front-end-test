@@ -53,7 +53,8 @@ export interface HotelContent {
 }
 
 export interface HotelImage {
-    RESULTS_CAROUSEL: Image
+    RESULTS_CAROUSEL: Image,
+    MOBILE_MAIN: Image
 }
 
 export interface Image {

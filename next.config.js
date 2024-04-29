@@ -12,6 +12,9 @@ const nextConfig = {
 	typescript: {
 		ignoreBuildErrors: true,
 	},
+	images: {
+        domains: ['d3hk78fplavsbl.cloudfront.net'],
+    },
 	async headers() {
 		return [
 		  {

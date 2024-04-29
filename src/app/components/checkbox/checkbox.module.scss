@@ -1,0 +1,55 @@
+.customCheckbox {
+    $size: 20px;
+    display: block;
+    cursor: pointer;
+    min-height: $size;
+    padding-left: 29px;
+    position: relative;
+    overflow: hidden;
+
+    .checkboxBlock {
+        display: flex;
+    }
+
+    .checkbox {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        border: 0;
+    }
+
+    .checkmark {
+        border: 1px solid var(--token-color-colour-border-inverted);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: $size;
+        width: $size;
+
+        &:after {
+            content: '';
+            display: none;
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 10px;
+            border: solid var(--token-color-colour-border-inverted);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+
+    &.active .checkmark:after {
+        display: block;
+    }
+
+    .label {
+        position: relative;
+    }
+
+    .count {
+        margin-left: 5px;
+    }
+}

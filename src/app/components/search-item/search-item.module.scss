@@ -1,0 +1,35 @@
+.holidayDeal {
+    padding: 16px;
+    width: 100%;
+
+    @media (min-width: 1024px) {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .imageContainer {
+        max-height: 250px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .dealInfo {
+        color: var(--token-color-colour-text-primary);
+        padding: 16px;
+
+        h3 {
+            color: var(--token-color-colour-brand-purple);
+            font-size: 1.8rem;
+            padding: 0;
+            margin: 0 0 4px;
+        }
+
+        .dealLocation {
+            color: var(--token-color-colour-text-secondary);
+            font-size: 1.4rem;
+            margin: 0 0 16px;
+        }
+    }
+}

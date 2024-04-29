@@ -1,0 +1,26 @@
+.filterGroup {
+    border-top: 1px solid #d9d9d9;
+    margin: 0 0 17px;
+    padding: 17px 0 15px;
+
+    &:first-child {
+        border-top: none;
+    }
+}
+.filterTitle {
+    font-size: 1.4rem;
+    color: #333;
+    text-transform: uppercase;
+    margin: 0;
+    margin: 0 0 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.filterList {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.filterItem {
+    margin-bottom: 8px;
+}

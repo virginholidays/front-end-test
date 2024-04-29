@@ -1,0 +1,39 @@
+/* Small fix to support mobile, has to be improved */
+
+.container {
+  align-items: start;
+  display: flex;
+  flex-direction: row;
+}
+
+.filters {
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 0 0 70%;
+  max-width: 70%;
+}
+
+.empty {
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .filters {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .result {
+    flex-wrap: wrap;
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}

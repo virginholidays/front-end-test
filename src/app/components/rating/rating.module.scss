@@ -1,0 +1,14 @@
+.text {
+    color: var(--token-color-colour-brand-red);
+}
+
+.stars {
+    display: inline-flex;
+    flex-wrap: nowrap;
+
+    & > svg {
+        margin: 0 3px 0 0;
+        width: 15px;
+        height: 15px;
+    }
+}

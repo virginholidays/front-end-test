@@ -1,0 +1,22 @@
+.priceBlock {
+    padding: 16px 0 0;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .pricePP {
+        color: var(--token-color-colour-text-primary);
+        font-size: 3.2rem;
+    }
+    .priceTotal {
+        line-height: 1.5;
+        color: var(--token-color-colour-text-secondary);
+        white-space: nowrap;
+
+        strong {
+            margin-left: 3px;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.carousel {
+    height: 250px;
+    position: relative;
+}
+
+.prev,
+.next {
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.prev {
+    left: 16px;
+}
+
+.next {
+    right: 16px;
+}
