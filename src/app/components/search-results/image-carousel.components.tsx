@@ -15,13 +15,16 @@ export default function ImageCarouselComponent(props: any) {
     };
 
     return (
-        <div>
+        <section className={styles.imgCarausel}>
             <img src={images[currentImageIndex].RESULTS_CAROUSEL.url} alt="Carousel Image" />
-            <section className={styles.imgCarausel}>
+            <section className={styles.imgCarauselNavBar}>
                 <button className={styles.navBtn} onClick={handlePrevImage}>{"<"}</button>
-                <p>{`${currentImageIndex + 1} of ${images.length}`}</p>
+                <div>
+                    <p>{`${currentImageIndex + 1} of ${images.length}`}</p>
+
+                </div>
                 <button className={styles.navBtn} onClick={handleNextImage}>{">"}</button>
             </section>
-        </div>
+        </section>
     );
 };
