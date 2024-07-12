@@ -5,7 +5,9 @@ export const filterHotelData = (holidays: any, filterParams: any) => {
     let filterData = JSON.parse(JSON.stringify(holidays));
     if (ratings && ratings.length > 0) {
         filterData = filterData.filter((holiday: any) => {
-            return ratings.includes(holiday?.hotel?.content?.vRating)
+            const vRating = holiday?.hotel?.content?.vRating;
+            const vRatings = ratings.map((rating: any) => rating?.value)
+            return vRatings.includes(vRating)
         })
     } if (pricePP && pricePP.length > 0) {
         filterData = filterData.filter((holiday: any) => {

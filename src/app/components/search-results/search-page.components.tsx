@@ -9,7 +9,7 @@ export default function SearchPageComponent(props: any) {
     const [filteredResults, setFilteredResults] = useState(props.results.holidays)
 
 
-    function handleOnFilterApplied(reset: boolean = false, filters: any) {
+    function handleOnFilterApplied(reset: boolean = false, filters: any, min: number, max: number) {
         if (reset) {
             setFilteredResults(props.results.holidays)
             return
@@ -36,7 +36,7 @@ export default function SearchPageComponent(props: any) {
                 {filteredResults.length}
                 <FilterComponent onfilterApplied={handleOnFilterApplied} />
                 <section style={{ display: "flex", flexDirection: "column" }}>
-                    {filteredResults.map((holiday: any) => <HotelWidgetComponent widgetParams={holiday} />)}
+                    {filteredResults.map((holiday: any) => <HotelWidgetComponent key={holiday.id} widgetParams={holiday} />)}
                 </section>
             </div>
         </section>
