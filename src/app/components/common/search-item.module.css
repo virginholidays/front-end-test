@@ -1,0 +1,14 @@
+.title {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.content {
+    /* Add styles for the search input element here */
+    font-size: 12px;
+    line-height: 16px;
+}

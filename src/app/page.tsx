@@ -10,14 +10,14 @@ export default function Home() {
     {
       bookingType: 'holiday',
       location: 'orlando',
-      departureDate: DateTime.now().plus({ days: 7, months: 1}).toFormat(DATE_FORMATS.URL_DATE),
+      departureDate: DateTime.now().plus({ days: 7, months: 1 }).toFormat(DATE_FORMATS.URL_DATE),
       direct: false,
       duration: "7",
       gateway: 'LHR',
       partyCompositions: [
         {
           adults: 2,
-          childAges: [],
+          childAges: [5, 6, 7],
           infants: 0
         }
       ]
@@ -32,7 +32,7 @@ export default function Home() {
       partyCompositions: [
         {
           adults: 2,
-          childAges: [],
+          childAges: [2, 3, 5],
           infants: 0
         }
       ]

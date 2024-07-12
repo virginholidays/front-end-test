@@ -1,0 +1,31 @@
+.editButton {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    padding: 12px 36px;
+    color: #fff;
+    background-color: #067b93;
+    transition: background-color .5s ease;
+    white-space: nowrap;
+}
+
+.navBtn {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    text-align: center;
+    padding: 5px;
+    transition: background-color .5s ease;
+    white-space: nowrap;
+}
+
+.imgCarausel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -1,0 +1,116 @@
+{
+    "data": [
+        {
+            "filterName": "HOTAL NAME",
+            "filterId": "hotelName",
+            "filters": [
+                {
+                    "filterType": "input",
+                    "filterId": "hotelName"
+                }
+            ]
+        },
+        {
+            "filterName": "Rating",
+            "filterId": "ratings",
+            "filters": [
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star5plus",
+                    "value": "5+",
+                    "label": "5+ Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star5",
+                    "value": "5",
+                    "label": "5 Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star4plus",
+                    "filterQuery": "ratings=4+",
+                    "value": "4+",
+                    "label": "4+ Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star4",
+                    "filterQuery": "ratings=4",
+                    "value": "4",
+                    "label": "4 Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star3plus",
+                    "filterQuery": "ratings=3+",
+                    "value": "3+",
+                    "label": "3+ Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star3",
+                    "value": "3",
+                    "label": "3 Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star2",
+                    "value": "2",
+                    "label": "2 Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "star1",
+                    "value": "1",
+                    "label": "1 Star"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "villa",
+                    "value": "NA",
+                    "label": "VILLA"
+                }
+            ]
+        },
+        {
+            "filterName": "Price(PP)",
+            "filterId": "pricePP",
+            "filters": [
+                {
+                    "filterType": "checkbox",
+                    "filterId": "upto1460",
+                    "filterQuery": "pricePP?min=&max=1460",
+                    "value": 1460,
+                    "min": 0,
+                    "max": 1460,
+                    "label": "upto £1460"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "btw1460to1820",
+                    "value": 1820,
+                    "min": 1460,
+                    "max": 2100,
+                    "label": "£1460 to £1820"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "btw1820to2100",
+                    "value": 2100,
+                    "min": 1820,
+                    "max": 2100,
+                    "label": "£1820 to £2100"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "over2100",
+                    "value": 2101,
+                    "min": 2100,
+                    "max": 99999999,
+                    "label": "over £2100"
+                }
+            ]
+        }
+    ]
+}
