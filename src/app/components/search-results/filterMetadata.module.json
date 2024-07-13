@@ -16,36 +16,15 @@
             "filters": [
                 {
                     "filterType": "checkbox",
-                    "filterId": "star5plus",
-                    "value": "5+",
-                    "label": "5+ Star"
-                },
-                {
-                    "filterType": "checkbox",
                     "filterId": "star5",
                     "value": "5",
                     "label": "5 Star"
                 },
                 {
                     "filterType": "checkbox",
-                    "filterId": "star4plus",
-                    "filterQuery": "ratings=4+",
-                    "value": "4+",
-                    "label": "4+ Star"
-                },
-                {
-                    "filterType": "checkbox",
                     "filterId": "star4",
-                    "filterQuery": "ratings=4",
                     "value": "4",
                     "label": "4 Star"
-                },
-                {
-                    "filterType": "checkbox",
-                    "filterId": "star3plus",
-                    "filterQuery": "ratings=3+",
-                    "value": "3+",
-                    "label": "3+ Star"
                 },
                 {
                     "filterType": "checkbox",
@@ -67,15 +46,21 @@
                 },
                 {
                     "filterType": "checkbox",
-                    "filterId": "villa",
+                    "filterId": "villas",
+                    "value": "Villas",
+                    "label": "VILLAS"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "NA",
                     "value": "NA",
-                    "label": "VILLA"
+                    "label": "No rating"
                 }
             ]
         },
         {
             "filterName": "Price(PP)",
-            "filterId": "pricePP",
+            "filterId": "pricePP1",
             "filters": [
                 {
                     "filterType": "checkbox",
@@ -109,6 +94,84 @@
                     "min": 2100,
                     "max": 99999999,
                     "label": "over £2100"
+                }
+            ]
+        },
+        {
+            "filterName": "Hotel Facilities",
+            "filterId": "hotelFacilities",
+            "filters": [
+                {
+                    "filterType": "checkbox",
+                    "filterId": "restaurant",
+                    "value": "Restaurant",
+                    "label": "Restaurant"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "bar",
+                    "value": "Bar",
+                    "label": "Bar"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "nightClub",
+                    "value": "Night Club",
+                    "label": "Night Club"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "roomService",
+                    "value": "Room Service",
+                    "label": "Room Service"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "internetAccess",
+                    "value": "Internet Access",
+                    "label": "Internet Access"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "swimmingPool",
+                    "value": "Swimming Pool",
+                    "label": "Swimming Pool"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "fitnessCentre",
+                    "value": "Fitness Centre/Gym",
+                    "label": "Fitness Centre/Gym"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "laundryService",
+                    "value": "Laundry Service",
+                    "label": "Laundry Service"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "noSmoking",
+                    "value": "No Smoking",
+                    "label": "No Smoking"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "valetParking",
+                    "value": "Valet parking",
+                    "label": "Valet parking"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "safetyDepositBox",
+                    "value": "Safety Deposit Box",
+                    "label": "Safety Deposit Box"
+                },
+                {
+                    "filterType": "checkbox",
+                    "filterId": "spa",
+                    "value": "Spa",
+                    "label": "Spa"
                 }
             ]
         }

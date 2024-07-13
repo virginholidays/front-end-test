@@ -1,116 +1,119 @@
 "use client";
 import { useState } from "react";
-import filterMetadata from "./filterMetadata.module.json";
+import filterMetadata1 from "./filterMetadata.module.json";
+import { generateFilterParametrs } from "@/utils/filterData.service";
 
+/**
+ * FilterComponent is a React component that displays filter options based on the provided results.
+ * It allows users to apply filters and notifies the parent component when filters are applied or reset.
+ *
+ * @param props - The component props.
+ * @param props.results - The search results to generate filters from.
+ * @param props.onfilterApplied - The callback function to be called when filters are applied or reset.
+ * @returns The rendered FilterComponent.
+ */
 export default function FilterComponent(props: any) {
+  const { results, onfilterApplied } = props;
+  const [appliedFilters, setAppliedFilters] = useState({} as any);
 
-  const [appliedFilters, setAppliedFilters] = useState({} as any)
+  /**
+   * Resets the applied filters and triggers the onfilterApplied callback with the reset flag.
+   */
   const resetHandler = async () => {
-    setAppliedFilters({})
-    props.onfilterApplied(true)
-  }
+    setAppliedFilters({});
+    onfilterApplied(true);
+  };
 
-  const onCheckboxChange1 = (checked: boolean, value: string, min: number, max: number, fid: string) => {
-    const fidValues = appliedFilters?.[fid] || []
-    if (checked && !fidValues.includes(value)) {
-      if (value === "NA") {
-        fidValues.push(undefined)
-      }
-      fidValues.push(value)
-    } else if (!checked && fidValues.includes(value)) {
-      if (value === "NA") {
-        fidValues.splice(fidValues.indexOf(undefined), 1)
-      }
-      fidValues.splice(fidValues.indexOf(value), 1)
-    }
-    setAppliedFilters({ ...appliedFilters, [fid]: fidValues })
-    const dd = fidValues.map((value: string) => ({ min, max, value }))
-    props.onfilterApplied(false, { ...appliedFilters, [fid]: dd, })
-  }
+  const { data } = generateFilterParametrs(results);
 
+  /**
+   * Handles the checkbox change event.
+   *
+   * @param checked - The new checked state of the checkbox.
+   * @param value - The value of the checkbox.
+   * @param min - The minimum value for the checkbox.
+   * @param max - The maximum value for the checkbox.
+   * @param fid - The filter ID.
+   */
   const onCheckboxChange = (checked: boolean, value: string, min: number, max: number, fid: string) => {
-    const fidValues = appliedFilters?.[fid] || []
-    const values = fidValues.map((v: any) => v.value)
+    const fidValues = appliedFilters?.[fid] || [];
+    const values = fidValues.map((v: any) => v.value);
     if (checked && !values.includes(value)) {
       if (value === "NA") {
-        fidValues.push({ value: undefined, min, max })
+        fidValues.push({ value: undefined, min, max });
       }
-      fidValues.push({ value, min, max })
+      fidValues.push({ value, min, max });
     } else if (!checked && values.includes(value)) {
       if (value === "NA") {
-        const index = fidValues.findIndex((v: any) => v.value === undefined)
-        fidValues.splice(fidValues.indexOf(index, 1))
+        const index = fidValues.findIndex((v: any) => v.value === undefined);
+        fidValues.splice(fidValues.indexOf(index, 1));
       }
-      const idx = fidValues.findIndex((v: any) => v.value === value)
-      fidValues.splice(idx, 1)
+      const idx = fidValues.findIndex((v: any) => v.value === value);
+      fidValues.splice(idx, 1);
     }
-    setAppliedFilters({ ...appliedFilters, [fid]: fidValues })
-    props.onfilterApplied(false, { ...appliedFilters, [fid]: fidValues })
-  }
+    setAppliedFilters({ ...appliedFilters, [fid]: fidValues });
+    onfilterApplied(false, { ...appliedFilters, [fid]: fidValues });
+  };
 
-  const onFilterChange = async (value: any, fid: string, filterId: string) => {
-    /* if (value) {
-      const fidValues = appliedFilters?.[fid] || []
-      if (!fidValues.includes(value)) {
-        fidValues.push(value)
-      }
-      const app = { ...appliedFilters, [fid]: fidValues }
-      setAppliedFilters(app)
-      props.onfilterApplied(false, app)
-    }
-    if (!value) {
-      const fidValues = appliedFilters?.[fid] || []
-      if (fidValues.includes(value)) {
-        fidValues.p
-      }
-    } */
-  }
+  /**
+   * Handles the filter change event.
+   *
+   * @param value - The new value of the filter.
+   * @param fid - The filter ID.
+   */
+  const onFilterChange = async (value: any, fid: string) => {
+    const app = { ...appliedFilters, [fid]: value };
+    setAppliedFilters(app);
+    props.onfilterApplied(false, app);
+  };
 
   const getFilter = (filters: any, fid: string) => {
     return filters.map((filter: any) => {
       return (
-        <div key={filter.filterType}>
+        <div key={filter.filterId}>
           {filter.filterType === "checkbox" && (
-            <div>
-              <input type="checkbox" id={filter.filterId} name={filter.filterId}
+            <section>
+              <input
+                type="checkbox"
+                id={filter.filterId}
+                name={filter.filterId}
                 checked={appliedFilters?.[fid]?.map((filter: any) => filter.value)?.includes(filter.value) || false}
                 onChange={(e) => onCheckboxChange(e.target.checked, filter.value, filter.min, filter.max, fid)}
               />
               <label htmlFor={filter.filterName}>{filter.label}</label>
-            </div>
-          )
-          }
+            </section>
+          )}
           {filter.filterType === "input" && (
             <div>
-              <input type="input" id={filter.filterId} name={filter.filterId}
-                value={appliedFilters?.[fid]?.map((filter: any) => filter.value)?.[filter.filterId] || ''}
-                onChange={(e) => onFilterChange(e.target.value, fid, filter.filterId)}
+              <input
+                type="input"
+                id={filter.filterId}
+                name={filter.filterId}
+                value={appliedFilters?.[fid] || ""}
+                onChange={(e) => onFilterChange(e.target.value, fid)}
               />
             </div>
-          )
-          }
+          )}
         </div>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return (
-    <section style={{ padding: "0px 10px", width: 400 }}>
+    <section style={{ padding: "0px 10px", width: 350 }}>
       <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <h1>Filter By</h1>
         <button onClick={resetHandler}>Reset</button>
       </div>
 
-      {filterMetadata.data.map((filter) => {
+      {data.map((filter: any) => {
         return (
           <div key={filter.filterName}>
-            <h1>
-              {filter.filterName}
-            </h1>
+            <h1>{filter.filterName}</h1>
             {getFilter(filter.filters, filter.filterId)}
-          </div>)
+          </div>
+        );
       })}
-
     </section>
   );
 }

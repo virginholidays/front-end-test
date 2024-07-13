@@ -1,8 +1,6 @@
 import { BookingResponse } from "@/types/booking";
 import { Rooms } from "@/utils/composition.service";
 import SearchBarComponent from "./search-bar.component";
-import FilterComponent from "./filter.components";
-import HotelWidgetComponent from "./hotel-widget.component";
 import SearchPageComponent from "./search-page.components";
 
 async function getData(params: { [key: string]: string | string[] | undefined }) {
@@ -40,17 +38,14 @@ export default async function SearchResultsComponent({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const req = await getData(searchParams);
-  // console.log(req);
   const results: BookingResponse = req;
-  console.log(results.holidays.map(hol => hol.hotel.content.vRating))
 
   return (
-    <>
+    <section>
       <SearchBarComponent searchParams={searchParams} />
       <section style={{ display: "flex", flexDirection: "row" }}>
-        <SearchPageComponent results={results} />
+        <SearchPageComponent results={results} searchParams={searchParams} />
       </section>
-    </>
-
+    </section>
   );
 }

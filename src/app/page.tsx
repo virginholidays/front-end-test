@@ -17,9 +17,9 @@ export default function Home() {
       partyCompositions: [
         {
           adults: 2,
-          childAges: [5, 6, 7],
+          childAges: [10],
           infants: 0
-        }
+        },
       ]
     },
     {
@@ -32,13 +32,25 @@ export default function Home() {
       partyCompositions: [
         {
           adults: 2,
-          childAges: [2, 3, 5],
+          childAges: [12, 10],
           infants: 0
+        },
+        {
+          adults: 3,
+          childAges: [14, 15],
+          infants: 1
         }
       ]
     },
   ];
 
+  const generateUrl = (sample: BookingRequest) => {
+    const { bookingType, location, gateway, departureDate, duration, partyCompositions } = sample;
+    const partyCompositionsString = partyCompositions.map((party: PartyComposition) => {
+      return `a${party.adults}&room=a${party.adults},${'c' + party.childAges.join(',c')}`
+    })
+    return `/results?bookingType=${bookingType}&location=${location}&gateway=${gateway}&departureDate=${departureDate}&duration=${duration}&partyCompositions=${partyCompositionsString}`
+  }
   return (
     <main className={`wrapper`}>
       <h1>Holiday Search Test</h1>
@@ -50,7 +62,7 @@ export default function Home() {
           samples?.map((sample: BookingRequest, idx: number) => {
             return (
               <li key={idx} className={styles.listItem}>
-                <Link href={`/results?bookingType=${sample?.bookingType}&location=${sample?.location}&gateway=${sample?.gateway}&departureDate=${sample?.departureDate}&duration=${sample?.duration}${sample?.partyCompositions?.map((party: PartyComposition, i: number) => `&partyCompositions=a${party?.adults}`).join('&')}`}>
+                <Link href={generateUrl(sample)}>
                   {`
                     ${sample?.location} from ${sample?.gateway} (${sample?.duration} nights, ${Rooms.prettyFormat(sample?.partyCompositions)}) 
                   `}
