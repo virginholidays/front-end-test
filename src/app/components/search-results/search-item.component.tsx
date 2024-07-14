@@ -1,14 +1,14 @@
 import styles from './search-results.module.css'
 export default function SearchItemComponent({
-    searchParams,
+    props
 }: {
-    searchParams: { title: String, content: any };
+    props: { title: String, content: any, border?: String };
 }) {
 
     return (
-        <section className={styles.seachItemContainer}>
-            <label className={styles.title} htmlFor="goingTo">{searchParams.title}</label>
-            <label className={styles.content} htmlFor="goingTo">{searchParams.content}</label>
+        <section className={`${styles.seachItemContainer} ${props.border === 'none' ? styles.rightBorderNone : ''}`}>
+            <label className={styles.title} htmlFor="goingTo">{props.title}</label>
+            <label className={styles.content} htmlFor="goingTo">{props.content}</label>
         </section>
     );
 }

@@ -80,6 +80,7 @@ export default function FilterComponent(props: any) {
                 checked={appliedFilters?.[fid]?.map((filter: any) => filter.value)?.includes(filter.value) || false}
                 onChange={(e) => onCheckboxChange(e.target.checked, filter.value, filter.min, filter.max, fid)}
               />
+
               <label htmlFor={filter.filterName}>{filter.label}</label>
             </section>
           )}
@@ -103,7 +104,7 @@ export default function FilterComponent(props: any) {
     <section className={styles.filterPanel}>
       <section className={styles.filterPanelHeader} >
         <h1 className={styles.filterTitle}>Filter By</h1>
-        <button onClick={resetHandler}>Reset</button>
+        <button className={styles.primaryButtonSmall} onClick={resetHandler}>Reset</button>
       </section>
       {data.map((filter: any) => {
         return (

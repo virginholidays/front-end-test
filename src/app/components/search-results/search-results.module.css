@@ -2,21 +2,23 @@
  * This CSS file contains styles for the search results component.
  * It includes styles for buttons.
  */
-/* Buttons css */
-
 .primaryButton {
-    display: flex;
-    align-items: center;
     cursor: pointer;
     border-radius: 4px;
-    text-decoration: none;
     border: none;
-    text-align: center;
     padding: 12px 36px;
+    text-decoration: none;
     color: #fff;
     background-color: #067b93;
-    transition: background-color .5s ease;
-    white-space: nowrap;
+}
+
+.primaryButtonSmall {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    padding: 6px 18px;
+    color: #fff;
+    background-color: #067b93;
 }
 
 .diplayFlexRow {
@@ -38,9 +40,25 @@
     margin-bottom: 20px;
 }
 
+.seachItem {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #a19f9f;
+    padding: 10px;
+    width: 100%;
+
+}
+
+.rightBorderNone {
+    border-right: none !important;
+}
+
 .seachItemContainer {
     display: flex;
+    border-left: 1px solid #a19f9f;
     flex-direction: column;
+    border-right: 1px solid #a19f9f;
+    border-left: none;
     width: 100px;
     padding: 10px;
     flex: 1
@@ -67,7 +85,7 @@
 /* Filter Panel */
 .filterPanel {
     padding: 0px 10px;
-    width: 380px
+    width: 390px
 }
 
 .filterPanelHeader {
@@ -88,7 +106,7 @@
     height: 312px;
     display: flex;
     flex-direction: row;
-    width: 970px;
+    width: 880px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5)
 }
 

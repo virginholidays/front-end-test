@@ -1,4 +1,5 @@
 import { Holiday } from "@/types/booking";
+import { get } from "http";
 
 /**
  * Generates filter parameters based on the provided results and filter metadata.
@@ -34,9 +35,15 @@ export const generateFilterParametrs = (results: any) => {
  * @returns The filtered hotel based on price per person range.
  */
 const getPricePPFilter = (holidays: Holiday[]) => {
-
+    // get all price per person available in a search results
     const pricePP = holidays?.map((holiday: any) => holiday.pricePerPerson) || {};
+    // get the min and max price per person
     const { min, max } = { min: Math.round(Math.min(...pricePP)), max: Math.round(Math.max(...pricePP)) };
+
+    // get number matching the price per person between the min and max price
+    const getNumber = (min: any, max: any) => pricePP.filter((r: any) => r >= min && r <= max).length;
+
+    // generate the price per person filter upto min price
     const pricePPFilters = {
         interval: 1000,
         filterName: "Price(PP)",
@@ -47,9 +54,10 @@ const getPricePPFilter = (holidays: Holiday[]) => {
             value: min,
             min: 0,
             max: min,
-            label: "upto £" + min
+            label: `upto £ ${min} (${getNumber(0, min)})`
         }]
     }
+    // generate the price per person filter based on the min and max price per person
     for (let i = min; i < max; i += pricePPFilters.interval) {
         pricePPFilters.filters.push({
             filterType: "checkbox",
@@ -57,7 +65,7 @@ const getPricePPFilter = (holidays: Holiday[]) => {
             value: i + pricePPFilters.interval,
             min: i,
             max: i + pricePPFilters.interval,
-            label: `£${i} to £${(i + pricePPFilters.interval)}`
+            label: `£${i} to £${(i + pricePPFilters.interval)} (${getNumber(i, i + pricePPFilters.interval)})`
         })
     }
     return pricePPFilters;
@@ -70,8 +78,13 @@ const getPricePPFilter = (holidays: Holiday[]) => {
  */
 const getStarRatingsFilter = (holidays: Holiday[]) => {
     const starRatings = holidays?.map((holiday: any) => holiday.hotel.content.starRating);
+
+    //get number matching the ratings
+    const getNumber = (rating: any) => starRatings.filter((r: any) => r === rating).length;
+
     // remove duplicates from the array and filter undefined values
     const uniqueRatings = [...new Set(starRatings)].filter((rating: any) => rating !== undefined);
+
     // sort the array from high to low rating keeping Villas at the end
     uniqueRatings.sort((a: any, b: any) => {
         if (a === 'Villas') return 1;
@@ -88,7 +101,7 @@ const getStarRatingsFilter = (holidays: Holiday[]) => {
                 filterType: "checkbox",
                 filterId: rating,
                 value: rating,
-                label: rating === 'NA' ? 'Not Rated' : rating
+                label: `${(rating === 'NA' ? 'Not Rated' : rating)}(${getNumber(rating === 'NA' ? undefined : rating)})`
             }
         })
     }
@@ -105,6 +118,8 @@ const getStarRatingsFilter = (holidays: Holiday[]) => {
 const getHotelFacilitiesFilter = (holidays: Holiday[]) => {
     // get all hotel facilities available in a search results
     const hotelFacilities = holidays?.map((holiday: any) => holiday.hotel.content.hotelFacilities.join(',')).join(',').split(',')
+    //get number matching the hotel facilities
+    const getNumber = (facility: any) => hotelFacilities.filter((r: any) => r === facility).length;
 
     // remove duplicates from the array
     const uniqueFacilities = [...new Set(hotelFacilities)];
@@ -114,7 +129,7 @@ const getHotelFacilitiesFilter = (holidays: Holiday[]) => {
             filterType: "checkbox",
             filterId: facility,
             value: facility,
-            label: facility
+            label: `${facility}(${getNumber(facility)})`
         }
     })
 

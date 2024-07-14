@@ -40,12 +40,12 @@ export default async function SearchBarComponent({
 
   return (
     <section className={styles.searchBar}>
-      <SearchItemComponent searchParams={{ title: "You Searched For", content: bookingType }} />
-      <SearchItemComponent searchParams={{ title: "Going TO:", content: location }} />
-      <SearchItemComponent searchParams={{ title: "Flying From:", content: gateway }} />
-      <SearchItemComponent searchParams={{ title: "Depart:", content: departureDate }} />
-      <SearchItemComponent searchParams={{ title: "Return:", content: returnDate }} />
-      <SearchItemComponent searchParams={{ title: "Room & Guests:", content: getRoomAndGuests() }} />
+      <SearchItemComponent props={{ title: "You Searched For", content: bookingType }} />
+      <SearchItemComponent props={{ title: "Going TO:", content: location }} />
+      <SearchItemComponent props={{ title: "Flying From:", content: gateway }} />
+      <SearchItemComponent props={{ title: "Depart:", content: departureDate }} />
+      <SearchItemComponent props={{ title: "Return:", content: returnDate }} />
+      <SearchItemComponent props={{ title: "Room & Guests:", content: getRoomAndGuests(), border: 'none' }} />
       <Link className={styles.primaryButton} href="/">Edit Search</Link>
     </section>
   );
