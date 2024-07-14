@@ -51,19 +51,19 @@ describe('generateFilterParametrs', () => {
                             filterType: 'checkbox',
                             filterId: 4,
                             value: 4,
-                            label: 4
+                            label: '4(1)'
                         },
                         {
                             filterType: 'checkbox',
                             filterId: 5,
                             value: 5,
-                            label: 5
+                            label: '5(1)'
                         },
                         {
                             filterType: 'checkbox',
                             filterId: 'NA',
                             value: 'NA',
-                            label: 'Not Rated'
+                            label: 'Not Rated(0)'
                         }
                     ]
                 },
@@ -78,7 +78,7 @@ describe('generateFilterParametrs', () => {
                             value: 100,
                             min: 0,
                             max: 100,
-                            label: 'upto £100'
+                            label: 'upto £100(1)'
                         },
                         {
                             filterType: 'checkbox',
@@ -86,7 +86,7 @@ describe('generateFilterParametrs', () => {
                             value: 1100,
                             min: 100,
                             max: 1100,
-                            label: '£100 to £1100'
+                            label: '£100 to £1100(2)'
                         }
                     ]
                 },
@@ -98,13 +98,13 @@ describe('generateFilterParametrs', () => {
                             filterType: 'checkbox',
                             filterId: 'Gym',
                             value: 'Gym',
-                            label: 'Gym'
+                            label: 'Gym(2)'
                         },
                         {
                             filterType: 'checkbox',
                             filterId: 'Pool',
                             value: 'Pool',
-                            label: 'Pool'
+                            label: 'Pool(2)'
                         }
                     ]
                 }
@@ -113,6 +113,7 @@ describe('generateFilterParametrs', () => {
 
         // Generate filter parameters
         const filterParams = generateFilterParametrs(results);
+        console.log('suneel', filterParams, expectedFilterParams);
         // Assertion
         expect(filterParams).to.deep.equal(expectedFilterParams);
     });

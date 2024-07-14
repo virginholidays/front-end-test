@@ -1,5 +1,4 @@
 import { Holiday } from "@/types/booking";
-import { get } from "http";
 
 /**
  * Generates filter parameters based on the provided results and filter metadata.
@@ -13,7 +12,7 @@ export const generateFilterParametrs = (results: any) => {
     const hfFilters = getHotelFacilitiesFilter(holidays);
     const starRatingsFilter = getStarRatingsFilter(holidays);
     const hotelNameFilter = {
-        filterName: "Hotal Name",
+        filterName: "Hotel Name",
         filterId: "hotelName",
         filters: [
             {
@@ -54,19 +53,23 @@ const getPricePPFilter = (holidays: Holiday[]) => {
             value: min,
             min: 0,
             max: min,
-            label: `upto £ ${min} (${getNumber(0, min)})`
+            label: `upto £${min}(${getNumber(0, min)})`
         }]
     }
     // generate the price per person filter based on the min and max price per person
     for (let i = min; i < max; i += pricePPFilters.interval) {
-        pricePPFilters.filters.push({
-            filterType: "checkbox",
-            filterId: i + "-" + (i + pricePPFilters.interval),
-            value: i + pricePPFilters.interval,
-            min: i,
-            max: i + pricePPFilters.interval,
-            label: `£${i} to £${(i + pricePPFilters.interval)} (${getNumber(i, i + pricePPFilters.interval)})`
-        })
+        // get number of price per person between the min and max price
+        const numberInInterval = getNumber(i, i + pricePPFilters.interval);
+        if (numberInInterval > 0) {
+            pricePPFilters.filters.push({
+                filterType: "checkbox",
+                filterId: i + "-" + (i + pricePPFilters.interval),
+                value: i + pricePPFilters.interval,
+                min: i,
+                max: i + pricePPFilters.interval,
+                label: `£${i} to £${(i + pricePPFilters.interval)}(${numberInInterval})`
+            })
+        }
     }
     return pricePPFilters;
 }

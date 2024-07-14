@@ -103,10 +103,10 @@
 /* Hotel widget */
 .widgetContainer {
     margin: 10px 0px;
-    height: 312px;
+    height: 292px;
     display: flex;
     flex-direction: row;
-    width: 880px;
+    width: 882px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5)
 }
 
@@ -128,8 +128,13 @@
 
 .widgetBtn {
     width: 226px;
-    height: 60px;
+    height: 40px;
+    font-weight: 600;
+    font-size: small;
     border-radius: none;
+    border-color: #e6e8e9;
+    background-color: #fff;
+    border: 0.5px solid #e6e8e9;
 }
 
 .price {
