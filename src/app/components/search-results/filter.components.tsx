@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import filterMetadata1 from "./filterMetadata.module.json";
 import { generateFilterParametrs } from "@/utils/filterData.service";
+import styles from "./search-results.module.css";
 
 /**
  * FilterComponent is a React component that displays filter options based on the provided results.
@@ -70,7 +70,7 @@ export default function FilterComponent(props: any) {
   const getFilter = (filters: any, fid: string) => {
     return filters.map((filter: any) => {
       return (
-        <div key={filter.filterId}>
+        <section key={filter.filterId}>
           {filter.filterType === "checkbox" && (
             <section>
               <input
@@ -84,7 +84,7 @@ export default function FilterComponent(props: any) {
             </section>
           )}
           {filter.filterType === "input" && (
-            <div>
+            <section>
               <input
                 type="input"
                 id={filter.filterId}
@@ -92,26 +92,25 @@ export default function FilterComponent(props: any) {
                 value={appliedFilters?.[fid] || ""}
                 onChange={(e) => onFilterChange(e.target.value, fid)}
               />
-            </div>
+            </section>
           )}
-        </div>
+        </section>
       );
     });
   };
 
   return (
-    <section style={{ padding: "0px 10px", width: 350 }}>
-      <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <h1>Filter By</h1>
+    <section className={styles.filterPanel}>
+      <section className={styles.filterPanelHeader} >
+        <h1 className={styles.filterTitle}>Filter By</h1>
         <button onClick={resetHandler}>Reset</button>
-      </div>
-
+      </section>
       {data.map((filter: any) => {
         return (
-          <div key={filter.filterName}>
-            <h1>{filter.filterName}</h1>
+          <section key={filter.filterName}>
+            <h1 className={styles.filterTitle}>{filter.filterName}</h1>
             {getFilter(filter.filters, filter.filterId)}
-          </div>
+          </section>
         );
       })}
     </section>

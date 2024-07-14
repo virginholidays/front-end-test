@@ -3,8 +3,10 @@
  * It includes styles for buttons.
  */
 /* Buttons css */
-.editButton {
-    display: inline-block;
+
+.primaryButton {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     border-radius: 4px;
     text-decoration: none;
@@ -15,6 +17,137 @@
     background-color: #067b93;
     transition: background-color .5s ease;
     white-space: nowrap;
+}
+
+.diplayFlexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.diplayFlexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: #e8e8e8;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+}
+
+.seachItemContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    padding: 10px;
+    flex: 1
+}
+
+.searchItemTitle {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.searchItemContent {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+
+
+
+
+/* Filter Panel */
+.filterPanel {
+    padding: 0px 10px;
+    width: 380px
+}
+
+.filterPanelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filterTitle {
+    font-size: 16px;
+    padding: 0;
+    margin: 8px 0px;
+}
+
+/* Hotel widget */
+.widgetContainer {
+    margin: 10px 0px;
+    height: 312px;
+    display: flex;
+    flex-direction: row;
+    width: 970px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5)
+}
+
+.widgetImageContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.widgetDetails {
+    padding: 20px;
+    width: 312px;
+}
+
+.widgetDetailsTitle {
+    font-size: 18px;
+    padding: 0;
+    margin: 0
+}
+
+.widgetBtn {
+    width: 226px;
+    height: 60px;
+    border-radius: none;
+}
+
+.price {
+    font-size: 2.5rem;
+    padding: 0;
+    margin: 0
+}
+
+/* Search Page */
+.searchPage {
+    padding: 0px 10px
+}
+
+.noResults {
+    position: relative;
+    font-size: 24px;
+    margin: 30px;
+    color: #067b93;
+    text-align: center;
+
+}
+
+.holidaysFoundContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0px
+}
+
+.holidaysFound {
+    background-color: #067b93;
+    border-radius: 3px;
+    padding: 5px 3px;
+    color: #fff;
+    width: 24px;
+    text-align: center;
+    margin-right: 4px;
 }
 
 .navBtn {
@@ -46,11 +179,7 @@
     flex-direction: row;
 }
 
-.cardbtn {
-    width: 227px;
-    height: 60px;
-    border-radius: none;
-}
+
 
 .imageCounter {
     background-color: rgba(23, 45, 34, 0.5);
@@ -63,33 +192,9 @@
     letter-spacing: normal
 }
 
-.cardbtncontainer {
-    height: "10%";
-    display: "flex";
-    flex-direction: "row"
-}
 
-.carddetails {
-    height: auto;
-    padding: 20px;
-    width: 310px;
-}
 
-.cardImageContainer {
-    height: 90%;
-    display: flex;
-    flex-direction: row;
-}
 
-.holidaysFound {
-    background-color: #067b93;
-    border-radius: 3px;
-    padding: 5px 3px;
-    color: #fff;
-    width: 24px;
-    text-align: center;
-    margin-right: 4px;
-}
 
 /*  colors */
 

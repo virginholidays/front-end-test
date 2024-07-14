@@ -1,4 +1,4 @@
-import styles from './search-item.module.css'
+import styles from './search-results.module.css'
 export default function SearchItemComponent({
     searchParams,
 }: {
@@ -6,9 +6,9 @@ export default function SearchItemComponent({
 }) {
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: 150, padding: "15px 10px", flex: 1 }}>
+        <section className={styles.seachItemContainer}>
             <label className={styles.title} htmlFor="goingTo">{searchParams.title}</label>
             <label className={styles.content} htmlFor="goingTo">{searchParams.content}</label>
-        </div>
+        </section>
     );
 }

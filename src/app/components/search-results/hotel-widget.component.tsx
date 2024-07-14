@@ -16,13 +16,13 @@ export default function HotelWidgetComponent(props: any) {
     const { hotel, totalPrice, pricePerPerson } = props.widgetParams || {};
     const { starRating, images } = hotel?.content || {};
     return (
-        <section style={{ margin: "10px 0px", height: "312px", display: "flex", flexDirection: "row", width: 1000, boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.5)" }}>
-            <section style={{ height: "auto" }}>
-                <section style={{ height: 'auto', display: "flex", flexDirection: "column" }}>
-                    <section className={styles.cardImageContainer}>
+        <section className={styles.widgetContainer}>
+            <section>
+                <section className={styles.displayFlexColumn}>
+                    <section className={styles.widgetImageContainer}>
                         <ImageCarouselComponent images={images} />
-                        <section className={styles.carddetails}>
-                            <h1 style={{ fontSize: "2.5rem", padding: 0, margin: 0 }}>{hotel?.name}</h1>
+                        <section className={styles.widgetDetails}>
+                            <h1 className={styles.widgetDetailsTitle}>{hotel?.name}</h1>
                             {hotel.content.parentLocation}
                             <p>{`Based on ${hotel?.tripAdvisor?.numReviews} reviews`}</p>
                             {starRating && <p>{`${starRating} Star rating`}</p>}
@@ -30,15 +30,15 @@ export default function HotelWidgetComponent(props: any) {
                             <p>{hotel?.salesMessage?.header}</p>
                         </section>
                     </section>
-                    <section className={styles.cardbtncontainer}>
-                        <button className={styles.cardbtn}>Find details</button>
-                        <button className={styles.cardbtn}>Hotel details</button>
-                        <button className={styles.cardbtn}>Reviews</button>
+                    <section className={styles.displayFlex}>
+                        <button className={styles.widgetBtn}>Find details</button>
+                        <button className={styles.widgetBtn}>Hotel details</button>
+                        <button className={styles.widgetBtn}>Reviews</button>
                     </section>
                 </section>
             </section>
-            <section className={`${styles.carddetails} ${styles.bgGrey}`}>
-                <h1 style={{ fontSize: "2.5rem", padding: 0, margin: 0 }}>{`£${pricePerPerson}pp`}</h1>
+            <section className={`${styles.widgetDetails} ${styles.bgGrey}`}>
+                <h1 className={styles.price}>{`£${pricePerPerson}pp`}</h1>
                 <p>{`Total for ${props.guests.length} guests £${totalPrice}`}</p>
             </section>
         </section>

@@ -1,3 +1,5 @@
+import { Holiday } from "@/types/booking";
+
 /**
  * Generates filter parameters based on the provided results and filter metadata.
  * @param results - The results data.
@@ -5,11 +7,12 @@
  */
 export const generateFilterParametrs = (results: any) => {
     const data: any = [];
-    const filterPP = getPricePPFilter(results);
-    const hfFilters = getHotelFacilitiesFilter(results);
-    const starRatingsFilter = getStarRatingsFilter(results);
+    const holidays: Holiday[] = results?.holidays;
+    const filterPP = getPricePPFilter(holidays);
+    const hfFilters = getHotelFacilitiesFilter(holidays);
+    const starRatingsFilter = getStarRatingsFilter(holidays);
     const hotelNameFilter = {
-        filterName: "HOTAL NAME",
+        filterName: "Hotal Name",
         filterId: "hotelName",
         filters: [
             {
@@ -30,8 +33,9 @@ export const generateFilterParametrs = (results: any) => {
  * @param results - The results data.
  * @returns The filtered hotel based on price per person range.
  */
-const getPricePPFilter = (results: any) => {
-    const pricePP = results?.holidays?.map((holiday: any) => holiday.pricePerPerson) || {};
+const getPricePPFilter = (holidays: Holiday[]) => {
+
+    const pricePP = holidays?.map((holiday: any) => holiday.pricePerPerson) || {};
     const { min, max } = { min: Math.round(Math.min(...pricePP)), max: Math.round(Math.max(...pricePP)) };
     const pricePPFilters = {
         interval: 1000,
@@ -64,8 +68,8 @@ const getPricePPFilter = (results: any) => {
  * @param results - The results data.
  * @returns The filtered hotel based on star ratings.
  */
-const getStarRatingsFilter = (results: any) => {
-    const starRatings = results?.holidays?.map((holiday: any) => holiday.hotel.content.starRating);
+const getStarRatingsFilter = (holidays: Holiday[]) => {
+    const starRatings = holidays?.map((holiday: any) => holiday.hotel.content.starRating);
     // remove duplicates from the array and filter undefined values
     const uniqueRatings = [...new Set(starRatings)].filter((rating: any) => rating !== undefined);
     // sort the array from high to low rating keeping Villas at the end
@@ -98,9 +102,9 @@ const getStarRatingsFilter = (results: any) => {
  * @param results - The results data.
  * @returns The filtered hotel based on hotel facilities.
  */
-const getHotelFacilitiesFilter = (results: any) => {
+const getHotelFacilitiesFilter = (holidays: Holiday[]) => {
     // get all hotel facilities available in a search results
-    const hotelFacilities = results?.holidays?.map((holiday: any) => holiday.hotel.content.hotelFacilities.join(',')).join(',').split(',')
+    const hotelFacilities = holidays?.map((holiday: any) => holiday.hotel.content.hotelFacilities.join(',')).join(',').split(',')
 
     // remove duplicates from the array
     const uniqueFacilities = [...new Set(hotelFacilities)];
@@ -130,7 +134,7 @@ const getHotelFacilitiesFilter = (results: any) => {
  * @param filterParams - The filter parameters.
  * @returns The filtered hotel data.
  */
-export const filterHotelData = (holidays: any, filterParams: any) => {
+export const filterHotelData = (holidays: Holiday[], filterParams: any) => {
     const { ratings, pricePP, hotelName, hotelFacilities } = filterParams || {};
     // filter hotel data based on the rating
     let filterData = JSON.parse(JSON.stringify(holidays));

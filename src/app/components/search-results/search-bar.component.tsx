@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import { DATE_FORMATS } from '@/utils/constants';
 import styles from './search-results.module.css'
-import SearchItemComponent from "../common/search-item.component";
+import SearchItemComponent from "./search-item.component";
 
 /**
  * Renders the search bar component.
@@ -39,14 +39,14 @@ export default async function SearchBarComponent({
   const returnDate = DateTime.fromISO(departureDate?.toString() ?? "").plus({ days: Number(duration) }).toFormat(DATE_FORMATS.URL_DATE);
 
   return (
-    <section style={{ display: "flex", flexDirection: "row", alignItems: 'center', backgroundColor: '#e8e8e8', padding: "0px 10px" }}>
+    <section className={styles.searchBar}>
       <SearchItemComponent searchParams={{ title: "You Searched For", content: bookingType }} />
       <SearchItemComponent searchParams={{ title: "Going TO:", content: location }} />
       <SearchItemComponent searchParams={{ title: "Flying From:", content: gateway }} />
       <SearchItemComponent searchParams={{ title: "Depart:", content: departureDate }} />
       <SearchItemComponent searchParams={{ title: "Return:", content: returnDate }} />
       <SearchItemComponent searchParams={{ title: "Room & Guests:", content: getRoomAndGuests() }} />
-      <Link className={styles.editButton} href="/">Edit Search</Link>
+      <Link className={styles.primaryButton} href="/">Edit Search</Link>
     </section>
   );
 }

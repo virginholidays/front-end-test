@@ -34,7 +34,7 @@ describe('generateFilterParametrs', () => {
         const expectedFilterParams = {
             data: [
                 {
-                    filterName: 'HOTAL NAME',
+                    filterName: 'Hotel Name',
                     filterId: 'hotelName',
                     filters: [
                         {

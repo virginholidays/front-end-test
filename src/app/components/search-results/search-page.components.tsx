@@ -4,6 +4,7 @@ import FilterComponent from "./filter.components";
 import HotelWidgetComponent from "./hotel-widget.component";
 import { filterHotelData } from "@/utils/filterData.service";
 import styles from "./search-results.module.css";
+import { Holiday } from "@/types/booking";
 
 /**
  * Renders the search page component.
@@ -15,7 +16,8 @@ import styles from "./search-results.module.css";
  */
 export default function SearchPageComponent(props: any) {
     const { results, searchParams } = props;
-    const [filteredResults, setFilteredResults] = useState(results?.holidays);
+    const holidays: Holiday[] = results?.holidays;
+    const [filteredResults, setFilteredResults] = useState(holidays);
 
     /**
      * Handles the filter applied event.
@@ -25,9 +27,9 @@ export default function SearchPageComponent(props: any) {
      */
     function handleOnFilterApplied(reset: boolean = false, filters: any) {
         if (reset) {
-            setFilteredResults(results.holidays);
+            setFilteredResults(holidays);
         } else {
-            setFilteredResults(filterHotelData(results.holidays, filters));
+            setFilteredResults(filterHotelData(holidays, filters));
         }
     }
 
@@ -35,14 +37,15 @@ export default function SearchPageComponent(props: any) {
     const guests = Array.isArray(searchParams.room) ? searchParams.room.join(',').split(',') : searchParams.room?.split(',') || [];
 
     return (
-        <section style={{ padding: "0px 10px" }}>
-            <div style={{ display: "flex", flexDirection: "row" }}>
+        <section className={styles.searhPage}>
+            <section className={styles.diplayFlexRow}>
                 <FilterComponent onfilterApplied={handleOnFilterApplied} results={results} />
-                <section style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-                    <section style={{ display: "flex", alignItems: 'center', margin: "10px 0px" }}> {noOfHolidays()} holidays found</section>
+                <section className={styles.displayFlexColumn}>
+                    <section className={styles.holidaysFoundContainer}> {noOfHolidays()} holidays found</section>
+                    {filteredResults?.length === 0 && <section className={styles.noResults}>Oops! No results found, please try to change the filters</section>}
                     {filteredResults?.map((holiday: any) => <HotelWidgetComponent key={holiday.hotel.id} widgetParams={holiday} guests={guests} />)}
                 </section>
-            </div>
+            </section>
         </section>
     );
 }
