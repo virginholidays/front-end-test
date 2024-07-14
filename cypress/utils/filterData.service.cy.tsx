@@ -1,32 +1,72 @@
 import { generateFilterParametrs, filterHotelData } from "@/utils/filterData.service";
-describe('filterData.service', () => {
+describe('generateFilterParametrs', () => {
     it('should generate filter parameters correctly', () => {
         // Test data
         const results = {
             holidays: [
                 {
                     pricePerPerson: 100,
+                    totalPrice: 200,
                     hotel: {
+                        boardBasis: 'BB',
                         content: {
-                            hotelFacilities: ['Facility 1', 'Facility 2']
+                            starRating: 4,
+                            hotelFacilities: ['Pool', 'Gym'],
+                            name: 'Hotel 1'
                         }
                     }
                 },
                 {
                     pricePerPerson: 200,
+                    totalPrice: 400,
                     hotel: {
+                        boardBasis: 'Bed and Breakfast',
                         content: {
-                            hotelFacilities: ['Facility 2', 'Facility 3']
+                            starRating: 5,
+                            hotelFacilities: ['Pool', 'Gym'],
+                            name: 'Hotel 2'
                         }
                     }
-                }
-            ]
+                }]
         };
-        const filterMetadata1 = {};
 
         // Expected result
-        const expectedFilterParameters = {
+        const expectedFilterParams = {
             data: [
+                {
+                    filterName: 'HOTAL NAME',
+                    filterId: 'hotelName',
+                    filters: [
+                        {
+                            filterType: 'input',
+                            filterId: 'hotelName'
+                        }
+                    ]
+                },
+                {
+                    filterName: 'Star Ratings',
+                    filterId: 'ratings',
+                    filters: [
+                        {
+                            filterType: 'checkbox',
+                            filterId: 4,
+                            value: 4,
+                            label: 4
+                        },
+                        {
+                            filterType: 'checkbox',
+                            filterId: 5,
+                            value: 5,
+                            label: 5
+                        },
+                        {
+                            filterType: 'checkbox',
+                            filterId: 'NA',
+                            value: 'NA',
+                            label: 'Not Rated'
+                        }
+                    ]
+                },
                 {
                     interval: 1000,
                     filterName: 'Price(PP)',
@@ -38,7 +78,7 @@ describe('filterData.service', () => {
                             value: 100,
                             min: 0,
                             max: 100,
-                            label: 'upto100'
+                            label: 'upto £100'
                         },
                         {
                             filterType: 'checkbox',
@@ -47,8 +87,7 @@ describe('filterData.service', () => {
                             min: 100,
                             max: 1100,
                             label: '£100 to £1100'
-                        },
-                        // ... other price filters
+                        }
                     ]
                 },
                 {
@@ -57,57 +96,107 @@ describe('filterData.service', () => {
                     filters: [
                         {
                             filterType: 'checkbox',
-                            filterId: 'Facility 1',
-                            value: 'Facility 1',
-                            label: 'Facility 1'
+                            filterId: 'Gym',
+                            value: 'Gym',
+                            label: 'Gym'
                         },
                         {
                             filterType: 'checkbox',
-                            filterId: 'Facility 2',
-                            value: 'Facility 2',
-                            label: 'Facility 2'
-                        },
-                        // ... other facility filters
+                            filterId: 'Pool',
+                            value: 'Pool',
+                            label: 'Pool'
+                        }
                     ]
                 }
             ]
         };
 
-        // Call the function
-        const generatedFilterParameters = generateFilterParametrs(results, filterMetadata1);
+        // Generate filter parameters
+        const filterParams = generateFilterParametrs(results);
+        // Assertion
+        expect(filterParams).to.deep.equal(expectedFilterParams);
+    });
+});
+
+describe('filterHotelData', () => {
+    // Test data
+    const holidays = [
+        {
+            pricePerPerson: 100,
+            hotel: {
+                content: {
+                    starRating: 4,
+                    hotelFacilities: ['Pool', 'Gym'],
+                    name: 'Hotel 1'
+                }
+            }
+        },
+        {
+            pricePerPerson: 200,
+            hotel: {
+                content: {
+                    starRating: 5,
+                    hotelFacilities: ['Spa', 'Restaurant'],
+                    name: 'Hotel 2'
+                }
+            }
+        }
+    ];
+
+    it('should filter hotel data based on ratings', () => {
+        // Filter parameters
+        const filterParams = {
+            ratings: [
+                { value: 4 },
+                { value: 5 }
+            ]
+        };
+
+        // Expected result
+        const expectedFilteredData = holidays;
+
+        // Filter hotel data
+        const filteredData = filterHotelData(holidays, filterParams);
 
         // Assertion
-        expect(generatedFilterParameters).to.deep.equal(expectedFilterParameters);
+        expect(filteredData).to.deep.equal(expectedFilteredData);
     });
 
-    it('should filter the hotel data correctly', () => {
-        // Test data
-        const holidays = [
-            {
-                pricePerPerson: 100,
-                hotel: {
-                    content: {
-                        starRating: 4,
-                        hotelFacilities: ['Facility 1', 'Facility 2'],
-                        name: 'Hotel A'
-                    }
-                }
-            },
+    it('should filter hotel data based on hotel facilities', () => {
+        // Filter parameters
+        const filterParams = {
+            hotelFacilities: [
+                { value: 'Spa' }
+            ]
+        };
+
+        // Expected result
+        const expectedFilteredData = [
             {
                 pricePerPerson: 200,
                 hotel: {
                     content: {
-                        starRating: 3,
-                        hotelFacilities: ['Facility 2', 'Facility 3'],
-                        name: 'Hotel B'
+                        starRating: 5,
+                        hotelFacilities: ['Spa', 'Restaurant'],
+                        name: 'Hotel 2'
                     }
                 }
             }
         ];
+
+        // Filter hotel data
+        const filteredData = filterHotelData(holidays, filterParams);
+
+        // Assertion
+        expect(filteredData).to.deep.equal(expectedFilteredData);
+    });
+
+    it('should filter hotel data based on price per person', () => {
+        // Filter parameters
         const filterParams = {
-            ratings: [{ value: 4 }],
-            pricePP: [{ min: 100, max: 200 }],
-            hotelName: 'Hotel'
+            pricePP: [
+                { min: 0, max: 100 }
+            ]
         };
 
         // Expected result
@@ -117,14 +206,30 @@ describe('filterData.service', () => {
                 hotel: {
                     content: {
                         starRating: 4,
-                        hotelFacilities: ['Facility 1', 'Facility 2'],
-                        name: 'Hotel A'
+                        hotelFacilities: ['Pool', 'Gym'],
+                        name: 'Hotel 1'
                     }
                 }
             }
         ];
 
-        // Call the function
+        // Filter hotel data
+        const filteredData = filterHotelData(holidays, filterParams);
+
+        // Assertion
+        expect(filteredData).to.deep.equal(expectedFilteredData);
+    });
+
+    it('should filter hotel data based on hotel name', () => {
+        // Filter parameters
+        const filterParams = {
+            hotelName: 'hotel'
+        };
+
+        // Expected result
+        const expectedFilteredData = holidays;
+
+        // Filter hotel data
         const filteredData = filterHotelData(holidays, filterParams);
 
         // Assertion
