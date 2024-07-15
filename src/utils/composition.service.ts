@@ -51,7 +51,7 @@ export namespace Rooms {
 			adults: room?.adults + (room?.childAges?.filter((age) => age >= 16)?.length ?? 0),
 			childAges: room?.childAges?.map(c => c) ?? [],
 			infants: room?.infants ?? 0
-		}));
+		})) || [];
 
 	export const format: (compositions: PartyComposition[]) => string[] = (compositions: PartyComposition[]) =>
 		compositions.map((composition) => {

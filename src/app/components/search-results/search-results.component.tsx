@@ -1,5 +1,8 @@
 import { BookingResponse } from "@/types/booking";
 import { Rooms } from "@/utils/composition.service";
+import SearchBarComponent from "./search-bar.component";
+import SearchPageComponent from "./search-page.components";
+import styles from "./search-results.module.css";
 
 async function getData(params: { [key: string]: string | string[] | undefined }) {
   const body = {
@@ -40,8 +43,10 @@ export default async function SearchResultsComponent({
 
   return (
     <section>
-      <h2>{results?.holidays?.length} results found</h2>
-      <p>Please fill out the filters and results list below&hellip;</p>
+      <SearchBarComponent searchParams={searchParams} />
+      <section className={styles.displayFlex}>
+        <SearchPageComponent results={results} searchParams={searchParams} />
+      </section>
     </section>
   );
 }
